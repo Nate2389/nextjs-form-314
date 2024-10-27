@@ -1,11 +1,10 @@
 import * as Yup from 'yup';
 
-import { Hobby, Level, Major, Instructor } from '@prisma/client';
+import { Hobby, Level, Major } from '@prisma/client';
 
 export const levelKeys = Object.keys(Level).filter((key) => Number.isNaN(Number(key)));
 export const hobbyKeys = Object.keys(Hobby).filter((key) => Number.isNaN(Number(key)));
 export const majorKeys = Object.keys(Major).filter((key) => Number.isNaN(Number(key)));
-export const instructorKeys = Object.keys(Instructor).filter((key) => Number.isNaN(Number(key)));
 
 export const gpaValues = ['0.0-0.9', '1.0-1.9', '2.0-2.9', '3.0-3.9', '4.0+'];
 export const gpa2String = (num: number) => gpaValues[num];
@@ -20,7 +19,6 @@ export interface ICreateStudentForm {
   level: string;
   gpa: number;
   major: string;
-  instructor?: (string | undefined | null)[] | undefined;
 }
 
 export const CreateStudentSchema = Yup.object().shape({
@@ -32,7 +30,6 @@ export const CreateStudentSchema = Yup.object().shape({
   enrolled: Yup.date().required(),
   hobbies: Yup.array().of(Yup.string()),
   major: Yup.string().oneOf(majorKeys),
-  instructor: Yup.string().oneOf(instructorKeys),
 });
 
 export const EditStudentSchema = Yup.object().shape({
@@ -44,5 +41,4 @@ export const EditStudentSchema = Yup.object().shape({
   enrolled: Yup.date().required(),
   hobbies: Yup.array().of(Yup.string()),
   major: Yup.string().oneOf(majorKeys),
-  instructor: Yup.string().oneOf(instructorKeys),
 });
