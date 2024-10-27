@@ -49,4 +49,12 @@ model StudentData {
   level   Level
   gpa     Int
   major   Major
+  instructor Instructor
+}
+
+enum Instructor {
+  Instructor1
+  Instructor2
+  Instructor3
+  Instructor4
 }
